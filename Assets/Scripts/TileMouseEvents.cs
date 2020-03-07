@@ -20,7 +20,9 @@ public class Tile : MonoBehaviour
         if (canPlace && Input.GetMouseButtonDown(0) && objectOnTile == null)
         {
             GameObject instantiatedObject = Instantiate(washingMachine);
-            instantiatedObject.GetComponent<Transform>().position = GetComponent<Transform>().position;
+            Vector3 objectPosition = GetComponent<Transform>().position;
+            objectPosition.y += 0.25f;
+            instantiatedObject.GetComponent<Transform>().position = objectPosition;
             objectOnTile = instantiatedObject;
         }
     }

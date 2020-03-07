@@ -11,7 +11,7 @@ public class StoreGenerator : MonoBehaviour
     private Sprite selectedTileSprite;
     private List<GameObject> tiles;
     private Color defaultColor;
-    private int gridSize = 6;
+    private int gridSize = 8;
 
     void Start()
     {
