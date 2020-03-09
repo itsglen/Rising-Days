@@ -37,13 +37,18 @@ public class Player : MonoBehaviour
 
         GameManager.instance.SetPlayerColliderPosition(GetComponent<Transform>().position);
 
-        spriteRenderer.sortingOrder = Mathf.RoundToInt(transform.position.y * 100f);
+        spriteRenderer.sortingOrder = Mathf.RoundToInt((transform.position.y - 0.5f) * 100f) * -1;
 
         Vector2 size = playerCollider.size;
         Vector3 centerPoint = new Vector3(playerCollider.offset.x, playerCollider.offset.y, 0f);
         Vector3 colliderWorldPos = transform.TransformPoint(playerCollider.offset);
 
         GameManager.instance.SetPlayerColliderPosition(colliderWorldPos);
+
+        if (Input.GetKeyUp(KeyCode.B))
+        {
+            GameManager.instance.ToggleBuildMode();
+        }
     }
 
     private void MovePlayer()

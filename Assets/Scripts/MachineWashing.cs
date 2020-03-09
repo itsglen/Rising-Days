@@ -6,16 +6,29 @@ public class MachineWashing : MonoBehaviour
 {
 
     private Animator animator;
+    private BoxCollider2D[] colliders;
+    private BoxCollider2D collider;
 
     void Start()
     {
         animator = GetComponent<Animator>();
-        GetComponent<SpriteRenderer>().sortingOrder = Mathf.RoundToInt(transform.position.y * 100f) * -1;
+        colliders = GetComponents<BoxCollider2D>();
+        foreach (BoxCollider2D collider in colliders)
+        {
+            if (collider.isTrigger)
+            {
+                this.collider = collider;
+            }
+        }
+
+        GetComponent<SpriteRenderer>().sortingOrder = Mathf.RoundToInt((transform.position.y - 0.5f) * 100f) * -1;
+        GameManager.instance.OnBuildModeChange += RespondToBuildMode;
     }
 
     void OnMouseOver()
     {
-        if (Input.GetMouseButtonDown(2) && !animator.GetBool("running"))
+        Debug.Log(GetComponent<Transform>().position);
+        if (Input.GetKeyDown(KeyCode.E) && !animator.GetBool("running"))
         {
             StartCoroutine(StartWashingCycle());
         }
@@ -26,6 +39,11 @@ public class MachineWashing : MonoBehaviour
         animator.SetBool("running", true);
         yield return new WaitForSeconds(60);
         animator.SetBool("running", false);
+    }
+
+    private void RespondToBuildMode()
+    {
+        collider.enabled = !GameManager.instance.buildMode;
     }
 
 }

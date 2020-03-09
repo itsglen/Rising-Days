@@ -6,6 +6,7 @@ public class Tile : MonoBehaviour
 {
     // Position refers to the center point of transform
     private Transform transform;
+    private BoxCollider2D collider;
 
     private bool canPlace = false;
 
@@ -18,7 +19,9 @@ public class Tile : MonoBehaviour
     void Start()
     {
         transform = GetComponent<Transform>();
+        collider = GetComponent<BoxCollider2D>();
         GameManager.instance.OnPlayerColliderPositionChange += PollMouseConditions;
+        GameManager.instance.OnBuildModeChange += RespondToBuildMode;
     }
 
     void Update()
@@ -66,6 +69,11 @@ public class Tile : MonoBehaviour
             canPlace = false;
             GetComponent<SpriteRenderer>().color = Color.white;
         }
+    }
+
+    private void RespondToBuildMode()
+    {
+        collider.enabled = GameManager.instance.buildMode;
     }
 
 }
