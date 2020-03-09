@@ -8,16 +8,13 @@ public class Utilities : MonoBehaviour
 
     public static Utilities instance = new Utilities();
     
+    // Currently assumes that against is a 16x16 px square
     public bool IsTransformWithinObject(Vector3 toCompare, Vector3 against)
     {
-        if (toCompare.x + 0.5 >= against.x && toCompare.x + 0.5 <= against.x + 1 && toCompare.y >= against.y && toCompare.y <= against.y + 1)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        // 4 pixels
+        double buffer = 0.125;
+
+        return (toCompare.x >= against.x - (0.25 + buffer) && toCompare.x <= against.x + (0.25 + buffer) && toCompare.y >= against.y - (0.25 + buffer) && toCompare.y <= against.y + (0.25 + buffer));
     }
 
     public int GetRandomIntWithinRange(int min, int max)

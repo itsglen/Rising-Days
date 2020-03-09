@@ -2,17 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TileMouseEvents : MonoBehaviour
+public class Tile : MonoBehaviour
 {
+    // Position refers to the center point of transform
+    private Transform transform;
 
     private bool canPlace = false;
 
     public GameObject washingMachine;
+    // A normal object can be placed directly on ground or above a ground object
     private GameObject objectOnTile = null;
+    // A ground object can have a normal object (like a washing machine) placed above it and can always be placed under a normal object
+    private GameObject groundObjectOnTile = null;
 
     void Start()
     {
-        GameManager.instance.OnPlayerPositionChange += PollMouseConditions;
+        transform = GetComponent<Transform>();
+        GameManager.instance.OnPlayerColliderPositionChange += PollMouseConditions;
     }
 
     void Update()
@@ -20,19 +26,21 @@ public class TileMouseEvents : MonoBehaviour
         if (canPlace && Input.GetMouseButtonDown(0) && objectOnTile == null)
         {
             GameObject instantiatedObject = Instantiate(washingMachine);
-            instantiatedObject.GetComponent<Transform>().position = GetComponent<Transform>().position;
+            Vector3 objectPosition = GetComponent<Transform>().position;
+            objectPosition.y += 0.25f;
+            instantiatedObject.GetComponent<Transform>().position = objectPosition;
             objectOnTile = instantiatedObject;
         }
     }
 
     void OnMouseOver()
     {
-        if ((Utilities.instance.IsTransformWithinObject(GameManager.instance.playerPosition, GetComponent<Transform>().position)|| objectOnTile != null) && (Vector2.Distance(GameManager.instance.playerPosition, GetComponent<Transform>().position) < 2))
+        if ((Utilities.instance.IsTransformWithinObject(GameManager.instance.playerColliderPosition, transform.position) || objectOnTile != null) && (Vector2.Distance(GameManager.instance.playerColliderPosition, transform.position) < 1))
         {
             canPlace = false;
             GetComponent<SpriteRenderer>().color = Color.red;
         }
-        else if (Vector2.Distance(GameManager.instance.playerPosition, GetComponent<Transform>().position) < 2)
+        else if (Vector2.Distance(GameManager.instance.playerColliderPosition, GetComponent<Transform>().position) < 1)
         {
             canPlace = true;
             GetComponent<SpriteRenderer>().color = Color.green;
@@ -53,7 +61,7 @@ public class TileMouseEvents : MonoBehaviour
 
     private void PollMouseConditions()
     {
-        if (Vector2.Distance(GameManager.instance.playerPosition, GetComponent<Transform>().position) > 2)
+        if (Vector2.Distance(GameManager.instance.playerColliderPosition, GetComponent<Transform>().position) > 2)
         {
             canPlace = false;
             GetComponent<SpriteRenderer>().color = Color.white;

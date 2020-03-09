@@ -6,15 +6,16 @@ public class GameManager : MonoBehaviour
 {
 
     public static GameManager instance = new GameManager();
-    public Vector3 playerPosition = new Vector3(0, 0, 0);
+    public Vector3 playerColliderPosition = new Vector3(0, 0, 0);
 
     public delegate void OnPlayerPositionChangeDelegate();
-    public event OnPlayerPositionChangeDelegate OnPlayerPositionChange;
+    public event OnPlayerPositionChangeDelegate OnPlayerColliderPositionChange;
 
-    public void SetPlayerPosition(Vector3 position)
+    // Position is the bottom center of BoxCollider2D
+    public void SetPlayerColliderPosition(Vector3 position)
     {
-        playerPosition = position;
-        OnPlayerPositionChange();
+        playerColliderPosition = position;
+        OnPlayerColliderPositionChange();
     }
 
 }

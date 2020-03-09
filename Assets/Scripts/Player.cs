@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
 
     private Rigidbody2D rigidbody2D;
     private Animator animator;
+    private BoxCollider2D playerCollider;
+    private SpriteRenderer spriteRenderer;
 
     private float defaultSpeed = 0.05f;
 
@@ -20,6 +22,8 @@ public class Player : MonoBehaviour
         rigidbody2D.freezeRotation = true;
 
         animator = GetComponent<Animator>();
+        playerCollider = GetComponent<BoxCollider2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void FixedUpdate()
@@ -30,17 +34,16 @@ public class Player : MonoBehaviour
     void Update()
     {
         HandleMovementAnimations();
-        GameManager.instance.SetPlayerPosition(GetComponent<Transform>().position);
 
-        GetComponent<SpriteRenderer>().sortingOrder = Mathf.RoundToInt(transform.position.y * 100f);
+        GameManager.instance.SetPlayerColliderPosition(GetComponent<Transform>().position);
 
-        BoxCollider2D collider = GetComponent<BoxCollider2D>();
+        spriteRenderer.sortingOrder = Mathf.RoundToInt(transform.position.y * 100f);
 
-        Vector2 size = collider.size;
-        Vector3 centerPoint = new Vector3(collider.offset.x, collider.offset.y, 0f);
-        Vector3 worldPos = transform.TransformPoint(collider.offset);
+        Vector2 size = playerCollider.size;
+        Vector3 centerPoint = new Vector3(playerCollider.offset.x, playerCollider.offset.y, 0f);
+        Vector3 colliderWorldPos = transform.TransformPoint(playerCollider.offset);
 
-        Debug.Log(worldPos);
+        GameManager.instance.SetPlayerColliderPosition(colliderWorldPos);
     }
 
     private void MovePlayer()
