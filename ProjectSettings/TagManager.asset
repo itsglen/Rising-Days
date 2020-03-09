@@ -48,3 +48,6 @@ TagManager:
   - name: Objects
     uniqueID: 4090823469
     locked: 0
+  - name: Borders
+    uniqueID: 1791456625
+    locked: 0
