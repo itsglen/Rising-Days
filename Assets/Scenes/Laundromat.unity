@@ -421,6 +421,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tile: {fileID: 4943569535266949456, guid: a817d324d033a684594b9050a9674519, type: 3}
+  wall: {fileID: 1285102361538485498, guid: efab113d333beff4ba239f651550b0f9, type: 3}
+  border: {fileID: 5182058723195462020, guid: fd7a3768a1dea844aadd41e93bbba4e7, type: 3}
 --- !u!1 &1494187784
 GameObject:
   m_ObjectHideFlags: 0

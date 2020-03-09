@@ -27,7 +27,6 @@ public class MachineWashing : MonoBehaviour
 
     void OnMouseOver()
     {
-        Debug.Log(GetComponent<Transform>().position);
         if (Input.GetKeyDown(KeyCode.E) && !animator.GetBool("running"))
         {
             StartCoroutine(StartWashingCycle());
