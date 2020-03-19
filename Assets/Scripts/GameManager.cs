@@ -18,7 +18,6 @@ public class GameManager : MonoBehaviour
     public void SetPlayerColliderPosition(Vector3 position)
     {
         playerColliderPosition = position;
-        OnPlayerColliderPositionChange();
     }
 
     public delegate void OnBuildModeChangedDelegate();
@@ -28,8 +27,8 @@ public class GameManager : MonoBehaviour
     public void ToggleBuildMode()
     {
         this.buildMode = !this.buildMode;
+        Debug.Log("Build Mode: " + this.buildMode);
         OnBuildModeChange();
     }
-
 
 }
