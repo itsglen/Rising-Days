@@ -53,11 +53,11 @@ public class Tile : MonoBehaviour
     private void BuildModeLogic()
     {
         // Player cannot place if standing within tile or if there is an object on the tile already
-        if (Utilities.instance.IsTransformWithinObject(GameManager.instance.playerColliderPosition, transform.position) || IsObjectVerticallyAdjacent())
+        if (Utilities.instance.IsTransformWithinObject(GameManager.instance.playerColliderPosition, transform.position) || IsObjectVerticallyAdjacent() || IsBlockingWalkway())
         {
             GetComponent<SpriteRenderer>().color = Color.red;
         }
-        else if (Vector2.Distance(GameManager.instance.playerColliderPosition, GetComponent<Transform>().position) < 1)
+        else if (Vector2.Distance(GameManager.instance.playerColliderPosition, GetComponent<Transform>().position) < 2)
         {
             GetComponent<SpriteRenderer>().color = Color.green;
 
@@ -70,6 +70,7 @@ public class Tile : MonoBehaviour
                 instantiatedObject.GetComponent<Transform>().position = objectPosition;
                 objectOnTile = instantiatedObject;
                 objectOnTile.GetComponent<TileObjectController>().SetTileReference(gameObject);
+                GameManager.instance.AddToStoreObjects(objectOnTile);
                 collider.enabled = false;
             }
         }
@@ -83,12 +84,53 @@ public class Tile : MonoBehaviour
         Vector3 upPosition = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
         Vector3 downPosition = new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z);
 
+        Vector3 upRightDiagonalPosition = new Vector3(transform.position.x + 0.5f, transform.position.y + 0.5f, transform.position.z);
+        Vector3 upLeftDiagonalPosition = new Vector3(transform.position.x - 0.5f, transform.position.y + 0.5f, transform.position.z);
+        Vector3 downRightDiagonalPosition = new Vector3(transform.position.x + 0.5f, transform.position.y - 0.5f, transform.position.z);
+        Vector3 downLeftDiagonalPosition = new Vector3(transform.position.x - 0.5f, transform.position.y - 0.5f, transform.position.z);
+
         RaycastHit2D[] upHits = Physics2D.RaycastAll(upPosition, Vector2.zero);
+        RaycastHit2D[] upRightDiagonalHits = Physics2D.RaycastAll(upRightDiagonalPosition, Vector2.zero);
+        RaycastHit2D[] upLeftDiagonalHits = Physics2D.RaycastAll(upLeftDiagonalPosition, Vector2.zero);
         RaycastHit2D[] downHits = Physics2D.RaycastAll(downPosition, Vector2.zero);
+        RaycastHit2D[] downRightDiagonalHits = Physics2D.RaycastAll(downRightDiagonalPosition, Vector2.zero);
+        RaycastHit2D[] downLeftDiagonalHits = Physics2D.RaycastAll(downLeftDiagonalPosition, Vector2.zero);
 
         foreach (RaycastHit2D hit in upHits)
         {
             if (hit.transform.tag != TILE && hit.transform.tag != WALL)
+            {
+                result = true;
+            }
+        }
+
+        foreach (RaycastHit2D hit in upRightDiagonalHits)
+        {
+            if (hit.transform.tag != TILE && hit.transform.tag != WALL && hit.transform.position.y <= upRightDiagonalPosition.y + 0.25f && hit.transform.position.y >= upRightDiagonalPosition.y + 0.25f)
+            {
+                result = true;
+            }
+        }
+
+        foreach (RaycastHit2D hit in upLeftDiagonalHits)
+        {
+            if (hit.transform.tag != TILE && hit.transform.tag != WALL && hit.transform.position.y <= upLeftDiagonalPosition.y + 0.25f && hit.transform.position.y >= upLeftDiagonalPosition.y + 0.25f)
+            {
+                result = true;
+            }
+        }
+
+        foreach (RaycastHit2D hit in downLeftDiagonalHits)
+        {
+            if (hit.transform.tag != TILE && hit.transform.position.y <= downLeftDiagonalPosition.y + 0.25f && hit.transform.position.y >= downLeftDiagonalPosition.y + 0.25f)
+            {
+                result = true;
+            }
+        }
+
+        foreach (RaycastHit2D hit in downRightDiagonalHits)
+        {
+            if (hit.transform.tag != TILE && hit.transform.position.y <= downRightDiagonalPosition.y + 0.25f && hit.transform.position.y >= downRightDiagonalPosition.y + 0.25f)
             {
                 result = true;
             }
@@ -103,6 +145,12 @@ public class Tile : MonoBehaviour
         }
 
         return result;
+    }
+
+    // Checks if item placement will block walkway - ie. is this the last available tile in row
+    private bool IsBlockingWalkway()
+    {
+        return false;
     }
 
 }

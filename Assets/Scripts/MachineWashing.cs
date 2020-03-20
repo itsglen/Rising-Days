@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MachineWashing : MonoBehaviour
+public class MachineWashing : MonoBehaviour, MachineI
 {
+
+    private bool occupied = false;
 
     private Animator animator;
 
@@ -12,19 +14,23 @@ public class MachineWashing : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    void OnMouseOver()
-    {
-        if (Input.GetKeyDown(KeyCode.E) && !animator.GetBool("running"))
-        {
-            StartCoroutine(StartWashingCycle());
-        }
-    }
-
     IEnumerator StartWashingCycle()
     {
+        occupied = true;
         animator.SetBool("running", true);
         yield return new WaitForSeconds(60);
         animator.SetBool("running", false);
+        occupied = false;
+    }
+
+    public void Interact()
+    {
+        StartCoroutine(StartWashingCycle());
+    }
+
+    public bool IsOccupied()
+    {
+        return occupied;
     }
 
 }

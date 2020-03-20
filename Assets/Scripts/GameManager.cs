@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
 
     public static GameManager instance = new GameManager();
+    public List<GameObject> storeObjects = new List<GameObject>();
     public Vector3 playerColliderPosition = new Vector3(0, 0, 0);
 
     // When a placeable item is selected in the players inventory, the player will enter build mode. This will activate colliders on tiles and disable colliders on other objects
@@ -29,6 +30,11 @@ public class GameManager : MonoBehaviour
         this.buildMode = !this.buildMode;
         Debug.Log("Build Mode: " + this.buildMode);
         OnBuildModeChange();
+    }
+
+    public void AddToStoreObjects(GameObject storeObject)
+    {
+        storeObjects.Add(storeObject);
     }
 
 }

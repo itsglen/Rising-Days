@@ -18,7 +18,7 @@ public class StoreGenerator : MonoBehaviour
     private Color defaultColor;
 
     // Size in grid units of one length of grid
-    private int gridSize = 10;
+    private int gridSize = 15;
     // The height of the wall sprite, value refers to grid units (will affect corner placement)
     private int wallHeight = 3;
 

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3557294562938881226}
   - component: {fileID: 8162588852056346401}
   m_Layer: 0
-  m_Name: Machine_Washing
+  m_Name: MachineWashing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -118,6 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f21e2fabe6e3dc64eb6dc1afe7bb9ebd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  occupied: 0
 --- !u!61 &-958967829687414953
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -156,6 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e99207e56bbc49f47a88f0d016261282, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  associatedObjectScript: {fileID: 4050238554801566078}
 --- !u!61 &8162588852056346401
 BoxCollider2D:
   m_ObjectHideFlags: 0
