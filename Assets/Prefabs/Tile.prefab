@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4943569535266949456}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7, y: 7, z: 2}
+  m_LocalPosition: {x: 9.5, y: 9.5, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -98,6 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   washingMachine: {fileID: 8169954421456651806, guid: 4e1cc2ce961381a4db461e87f4f5f440,
     type: 3}
+  objectOnTile: {fileID: 0}
 --- !u!61 &-688892821182439825
 BoxCollider2D:
   m_ObjectHideFlags: 0

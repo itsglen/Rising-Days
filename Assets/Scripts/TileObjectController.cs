@@ -8,7 +8,7 @@ public class TileObjectController : MonoBehaviour
     private BoxCollider2D[] colliders;
     private BoxCollider2D trigger;
     private BoxCollider2D collision;
-    private GameObject onTileReference = null;
+    public GameObject onTileReference = null;
 
     void Start()
     {

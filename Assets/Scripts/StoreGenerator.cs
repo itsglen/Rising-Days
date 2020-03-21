@@ -18,7 +18,7 @@ public class StoreGenerator : MonoBehaviour
     private Color defaultColor;
 
     // Size in grid units of one length of grid
-    private int gridSize = 15;
+    private int gridSize = 20;
     // The height of the wall sprite, value refers to grid units (will affect corner placement)
     private int wallHeight = 3;
 
@@ -41,6 +41,8 @@ public class StoreGenerator : MonoBehaviour
                 tiles.Add(instantiatedObject);
             }
         }
+
+        GameManager.instance.SetTiles(tiles);
 
         // Generate walls at the top of the tilemap
         for (int i = 1; i < gridSize + 1; i++)
@@ -180,6 +182,14 @@ public class StoreGenerator : MonoBehaviour
                             borderToInstantiate.GetComponent<SpriteRenderer>().sprite = border.GetComponent<Border>().top;
                             positionToSpawnAt.x -= (0.5f + (0.5f * j));
                             borderToInstantiate.GetComponent<Transform>().position = positionToSpawnAt;
+                            BoxCollider2D[] colliders = borderToInstantiate.GetComponents<BoxCollider2D>();
+                            foreach (BoxCollider2D collider in colliders)
+                            {
+                                if (!collider.isTrigger)
+                                {
+                                    collider.offset = new Vector2(0, -0.45f);
+                                }
+                            }
                             GameObject instantiatedObject = Instantiate(borderToInstantiate);
                             instantiatedObject.GetComponent<Transform>().parent = GetComponent<Transform>();
                             borders.Add(instantiatedObject);
@@ -249,9 +259,6 @@ public class StoreGenerator : MonoBehaviour
             }
 
         }
-
     }
-
-    
 
 }

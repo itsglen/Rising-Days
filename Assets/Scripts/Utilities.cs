@@ -17,6 +17,12 @@ public class Utilities : MonoBehaviour
         return (toCompare.x >= against.x - (0.25 + buffer) && toCompare.x <= against.x + (0.25 + buffer) && toCompare.y >= against.y - (0.25 + buffer) && toCompare.y <= against.y + (0.25 + buffer));
     }
 
+    // Currently assumes that against is a 16x16 px square
+    public bool IsTransformWithinObjectNoBuffer(Vector3 toCompare, Vector3 against)
+    {
+        return (toCompare.x >= against.x - 0.25 && toCompare.x <= against.x + 0.25 && toCompare.y >= against.y - 0.25 && toCompare.y <= against.y + 0.25);
+    }
+
     public int GetRandomIntWithinRange(int min, int max)
     {
         return new System.Random().Next(min, max);

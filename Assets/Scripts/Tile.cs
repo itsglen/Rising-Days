@@ -12,7 +12,7 @@ public class Tile : MonoBehaviour
 
     public GameObject washingMachine;
     // A normal object can be placed directly on ground or above a ground object
-    private GameObject objectOnTile = null;
+    public GameObject objectOnTile = null;
     // A ground object can have a normal object (like a washing machine) placed above it and can always be placed under a normal object
     private GameObject groundObjectOnTile = null;
     // Constant names for tags
