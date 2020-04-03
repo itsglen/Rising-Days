@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 8169954421456651805}
   - component: {fileID: -6271940109520188299}
   - component: {fileID: 4050238554801566078}
-  - component: {fileID: -958967829687414953}
-  - component: {fileID: 3557294562938881226}
-  - component: {fileID: 8162588852056346401}
+  - component: {fileID: 8928086167304864992}
+  - component: {fileID: 7635458682834588449}
+  - component: {fileID: 7628510527151432478}
   m_Layer: 0
   m_Name: MachineWashing
   m_TagString: Untagged
@@ -118,8 +118,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f21e2fabe6e3dc64eb6dc1afe7bb9ebd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
---- !u!61 &-958967829687414953
+--- !u!114 &8928086167304864992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8169954421456651806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c27bb6951c39c14dbce41fbff941ac5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!61 &7635458682834588449
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -132,33 +143,20 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0013503432, y: -0.06178367}
+  m_Offset: {x: 0, y: -0.019844249}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.5, y: 1}
+    oldSize: {x: 0.16, y: 0.32}
     newSize: {x: 0.5, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.49999654, y: 0.81328416}
+  m_Size: {x: 0.16, y: 0.2613658}
   m_EdgeRadius: 0
---- !u!114 &3557294562938881226
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8169954421456651806}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e99207e56bbc49f47a88f0d016261282, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  associatedObjectScript: {fileID: 4050238554801566078}
---- !u!61 &8162588852056346401
+--- !u!61 &7628510527151432478
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -171,16 +169,16 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.3612573}
+  m_Offset: {x: 0, y: -0.102727905}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.5, y: 1}
+    oldSize: {x: 0.16, y: 0.32}
     newSize: {x: 0.5, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.2127223}
+  m_Size: {x: 0.16, y: 0.094813615}
   m_EdgeRadius: 0
