@@ -138,7 +138,7 @@ public class TimeEventListener : ScriptableEventListener<DateTime>
         {
             TimeAM,
             Time24,
-            DateValues,
+            DayText,
             DateText
         }
 
@@ -166,10 +166,17 @@ public class TimeEventListener : ScriptableEventListener<DateTime>
         switch (stringEvent.outputStyle)
         {
             case StringEvent.ETextOutput.TimeAM:
-                return dateTime.ToString("hh:mm tt", System.Globalization.DateTimeFormatInfo.InvariantInfo);
+                return dateTime.ToString("dddd hh:mm tt", System.Globalization.DateTimeFormatInfo.InvariantInfo);
 
             case StringEvent.ETextOutput.Time24:
-                return dateTime.ToString("HH:mm");
+                return dateTime.ToString("dddd HH:mm");
+
+            case StringEvent.ETextOutput.DayText:
+                return dateTime.ToString("dddd");
+
+            case StringEvent.ETextOutput.DateText:
+                return dateTime.ToString("MMMM d, yyyy");
+
 
             default:
                 break;

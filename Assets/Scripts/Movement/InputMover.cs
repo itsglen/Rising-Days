@@ -17,6 +17,8 @@ public class InputMover : MonoBehaviour
     PlayerInputActions inputAction;
     Vector2 movementInput;
 
+    bool gamePauzed = true;
+
     // Awake since inputAction is referenced on Enable
     void Awake()
     {
@@ -33,17 +35,20 @@ public class InputMover : MonoBehaviour
 
     void FixedUpdate()
     {
-        float input_x = movementInput.x;
-        float input_y = movementInput.y;
+        if (!gamePauzed)
+        {
+            float input_x = movementInput.x;
+            float input_y = movementInput.y;
 
-        float calibratedSpeed = this.GetCalibratedSpeed(input_x, input_y);
+            float calibratedSpeed = this.GetCalibratedSpeed(input_x, input_y);
 
-        movementEvent.Invoke(movementInput);
+            movementEvent.Invoke(movementInput);
 
-        rigidbody2D.MovePosition(new Vector2(
-            (transform.position.x + input_x * calibratedSpeed),
-            (transform.position.y + input_y * calibratedSpeed))
-        );
+            rigidbody2D.MovePosition(new Vector2(
+                (transform.position.x + input_x * calibratedSpeed),
+                (transform.position.y + input_y * calibratedSpeed))
+            );
+        }
     }
 
     // Prevent excessive speed in diagonal directions by pythagoras
@@ -63,6 +68,11 @@ public class InputMover : MonoBehaviour
     private void OnDisable()
     {
         inputAction.Disable();
+    }
+
+    public void SetPauzed(bool state)
+    {
+        this.gamePauzed = state;
     }
 
 }

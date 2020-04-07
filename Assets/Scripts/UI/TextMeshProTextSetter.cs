@@ -12,8 +12,9 @@ public class TextMeshProTextSetter : MonoBehaviour
         text = GetComponent<TextMeshProUGUI>();
     }
 
-    public void SetText(Vector2 eventData)
+    public void SetText(object eventData)
     {
+        Debug.Log(eventData);
         text.text = eventData.ToString();
     }
 

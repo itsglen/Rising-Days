@@ -103,7 +103,7 @@ public class TimeSystem : GameSystem
         timeTickEvent?.Invoke(currentTime);
     }
 
-    /// <param name="day"> Specify a day between 1 and 31</param>
+    /// <param name="day"> Specify a day between 1 and 28</param>
     public void SetDay(int day)
     {
         currentTime = ChangeTime(currentTime.Year, currentTime.Month, day, currentTime.Hour, currentTime.Minute);
